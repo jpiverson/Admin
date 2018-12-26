@@ -35,7 +35,7 @@ public class SysAccount {
 	@Column(name = "name", length = 10, nullable = false)
 	private String name; // 姓名
 
-	@Column(name = "avatar", length = 50, nullable = false)
+	@Column(name = "avatar", length = 100, nullable = false)
 	private String avatar; // 头像
 
 	@Column(name = "password", length = 32, nullable = false)

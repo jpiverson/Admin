@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,9 @@ public class LoginController extends AdminController {
 	LogLoginService loginService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login() { //
+	public String login(ModelMap model, String requestUrl) {
+		logger.info("登录后跳转的地址:::" + requestUrl);
+		model.addAttribute("loginedUrl", requestUrl);
 		return "login";// 跳转到登录页面
 	}
 

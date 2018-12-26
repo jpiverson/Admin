@@ -60,6 +60,7 @@ var SnippetLogin = function() {
                     type: 'POST',
                     timeout: 5000,
                     success: function(e, t, r, s) {
+                    	alert(1);
                     	a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled", !1);
                     	if(e == 'ACCOUNT_DOES_NOT_EXIST'){
                             i(l, "danger", "抱歉，账号不存在！")
