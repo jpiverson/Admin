@@ -60,7 +60,6 @@ var SnippetLogin = function() {
                     type: 'POST',
                     timeout: 5000,
                     success: function(e, t, r, s) {
-                    	alert(1);
                     	a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled", !1);
                     	if(e == 'ACCOUNT_DOES_NOT_EXIST'){
                             i(l, "danger", "抱歉，账号不存在！")
@@ -69,7 +68,9 @@ var SnippetLogin = function() {
                     	}else if(e == 'TRY_TOO_MANY_TIMES'){
                     		i(l, "danger", "抱歉，尝试登录次数过多，请5分钟后再试！")
                     	}else{
-                    		i(l, "success", "恭喜，登录成功！");
+                    		var loginedUrl=$("#loginedUrl").val();
+                    		i(l, "success", "恭喜，登录成功");
+                    		window.location.href=loginedUrl;
                     	}
                     },
                     error: function(e,t,r,s){

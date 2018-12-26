@@ -7,11 +7,14 @@ import org.jboss.logging.Logger;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sproutlemon.admin.web.WebConstants;
+
 public class SessionInterceptor implements HandlerInterceptor {
 
 	Logger logger = Logger.getLogger(SessionInterceptor.class);
 
-	final static String[] URL_WHITE_LIST = new String[] { "/assets", "/login", "/error" };// 无需登录，允许访问的地址
+	final static String[] URL_WHITE_LIST = new String[] { WebConstants.ERROR_PATH, WebConstants.ASSETS_PATH,
+			WebConstants.LOGIN_PATH };// 无需登录，允许访问的地址
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -32,15 +35,15 @@ public class SessionInterceptor implements HandlerInterceptor {
 			}
 		}
 
-		Object sysAccount = request.getSession().getAttribute("sysAccount");// 获得session中的用户
-		String rediretUrl = request.getContextPath() + "/login?requestUrl=" + requestUrl;// 跳转的地址
+		Object sysAccount = request.getSession().getAttribute(WebConstants.SYS_ACCOUNT_SESSION_KEY);// 获得session中的用户
+		String rediretUrl = request.getContextPath() + WebConstants.LOGIN_PATH + "?requestUrl=" + requestUrl;// 跳转的地址
 		if (sysAccount == null) {
 			response.sendRedirect(rediretUrl);
 			logger.info("拦截结果是:::拦截!跳转到:::" + rediretUrl);
 			return false;
 		}
 
-		return false;
+		return true;
 
 	}
 

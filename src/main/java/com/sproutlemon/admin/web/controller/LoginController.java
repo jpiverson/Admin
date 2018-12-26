@@ -3,7 +3,6 @@ package com.sproutlemon.admin.web.controller;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,7 @@ import com.sproutlemon.admin.entity.sys.SysAccount;
 import com.sproutlemon.admin.enums.LoginFailureType;
 import com.sproutlemon.admin.service.log.LogLoginService;
 import com.sproutlemon.admin.service.sys.SysAccountService;
+import com.sproutlemon.admin.web.WebConstants;
 
 @Controller
 public class LoginController extends AdminController {
@@ -29,7 +29,13 @@ public class LoginController extends AdminController {
 	LogLoginService loginService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(ModelMap model, String requestUrl) {
+	public String login(HttpServletRequest request, ModelMap model, String requestUrl) {
+
+		Object sysAccount = request.getSession().getAttribute(WebConstants.SYS_ACCOUNT_SESSION_KEY);// 获得session中的用户
+		if (sysAccount != null) {
+			return "redirect:" + WebConstants.INDEX_PATH;
+		}
+
 		logger.info("登录后跳转的地址:::" + requestUrl);
 		model.addAttribute("loginedUrl", requestUrl);
 		return "login";// 跳转到登录页面
@@ -37,14 +43,14 @@ public class LoginController extends AdminController {
 
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(HttpSession session, HttpServletRequest request, String account, String password) {
+	public String login(HttpServletRequest request, String account, String password) {
 		String ipAddr = request.getRemoteAddr();
 		logger.info("收到来自" + ipAddr + "的登录请求，account:::" + account + ", password:::" + password);
 
 		LogLogin logLogin = new LogLogin(account, new Date(), ipAddr, 0, 1, LoginFailureType.NONE);// 初始化日志记录
 
-		SysAccount userAccount = accountService.findByAccount(account);
-		if (userAccount == null) { // 账号不存在
+		SysAccount sysAccount = accountService.findByAccount(account);
+		if (sysAccount == null) { // 账号不存在
 			logLogin.setFailureType(LoginFailureType.ACCOUNT_DOES_NOT_EXIST);
 			logLogin.setIsSuccess(0);
 			loginService.save(logLogin);// 写登录日志
@@ -52,14 +58,14 @@ public class LoginController extends AdminController {
 
 		}
 
-		if (!userAccount.getPassword().equalsIgnoreCase(DigestUtils.md5DigestAsHex(password.getBytes()))) { // 密码错误
+		if (!sysAccount.getPassword().equalsIgnoreCase(DigestUtils.md5DigestAsHex(password.getBytes()))) { // 密码错误
 			logLogin.setFailureType(LoginFailureType.WRONG_PASSWORD);
 			logLogin.setIsSuccess(0);
 			loginService.save(logLogin);// 写登录日志
 			return LoginFailureType.WRONG_PASSWORD.toString(); // 返回登录标识
 		}
 
-		session.setAttribute("userAccount", userAccount); // 登录成功，写入session
+		request.getSession().setAttribute(WebConstants.SYS_ACCOUNT_SESSION_KEY, sysAccount); // 登录成功，写入session
 		loginService.save(logLogin);// 写登录日志
 
 		return logLogin.getFailureType().toString();// 返回登录标识
