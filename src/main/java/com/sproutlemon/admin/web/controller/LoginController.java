@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sproutlemon.admin.entity.log.LogLogin;
-import com.sproutlemon.admin.entity.user.UserAccount;
+import com.sproutlemon.admin.entity.sys.SysAccount;
 import com.sproutlemon.admin.enums.LoginFailureType;
 import com.sproutlemon.admin.service.log.LogLoginService;
-import com.sproutlemon.admin.service.user.UserAccountService;
+import com.sproutlemon.admin.service.sys.SysAccountService;
 
 @Controller
 public class LoginController extends AdminController {
 
 	@Autowired
-	UserAccountService accountService;
+	SysAccountService accountService;
 
 	@Autowired
 	LogLoginService loginService;
@@ -40,7 +40,7 @@ public class LoginController extends AdminController {
 
 		LogLogin logLogin = new LogLogin(account, new Date(), ipAddr, 0, 1, LoginFailureType.NONE);// 初始化日志记录
 
-		UserAccount userAccount = accountService.findByAccount(account);
+		SysAccount userAccount = accountService.findByAccount(account);
 		if (userAccount == null) { // 账号不存在
 			logLogin.setFailureType(LoginFailureType.ACCOUNT_DOES_NOT_EXIST);
 			logLogin.setIsSuccess(0);

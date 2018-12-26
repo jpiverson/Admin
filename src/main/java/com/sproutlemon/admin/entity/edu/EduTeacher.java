@@ -37,9 +37,6 @@ public class EduTeacher {
 	@Column(name = "teacher_mobile", length = 11, nullable = false, unique = true)
 	private String teacherMobile; // 教师电话
 
-	@Column(name = "avatar", length = 50)
-	private String avatar; // 头像
-
 	@Column(name = "profile", length = 11, nullable = false)
 	private String profile; // 教师介绍
 
@@ -85,14 +82,6 @@ public class EduTeacher {
 
 	public void setTeacherMobile(String teacherMobile) {
 		this.teacherMobile = teacherMobile;
-	}
-
-	public String getAvatar() {
-		return avatar;
-	}
-
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
 	}
 
 	public String getProfile() {

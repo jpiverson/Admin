@@ -1,4 +1,4 @@
-package com.sproutlemon.admin.entity.user;
+package com.sproutlemon.admin.entity.sys;
 
 import java.util.Date;
 
@@ -22,29 +22,39 @@ import com.sproutlemon.admin.enums.UserAccoutType;
  *
  */
 @Entity
-@Table(name = "user_account")
-public class UserAccount {
+@Table(name = "sys_account")
+public class SysAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "account", length = 50, nullable = false, unique = true)
-	private String account; // 登录账号
+	@Column(name = "account", length = 20, nullable = false, unique = true)
+	private String account; // 登录账号，手机号
+
+	@Column(name = "name", length = 10, nullable = false)
+	private String name; // 姓名
+
+	@Column(name = "avatar", length = 50, nullable = false)
+	private String avatar; // 头像
 
 	@Column(name = "password", length = 32, nullable = false)
 	private String password; // 登录密码
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "account_type", length = 50, nullable = false)
+	@Column(name = "account_type", length = 20, nullable = false)
 	private UserAccoutType accountType; // 账号类型
 
-	@Column(name = "resetPass")
+	@Column(name = "resetPass", nullable = false)
 	private int resetPass; // 是否需要重置密码，1需要，0不需要
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "create_time", nullable = false, updatable = false)
 	private Date createTime; // 账号创建时间
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "update_time")
+	private Date updateTime; // 资料更新时间
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_login_time")
