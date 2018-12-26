@@ -1,5 +1,6 @@
 package com.sproutlemon.admin.entity.log;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "log_message")
-public class LogMessage {
+public class LogMessage implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3723575504675117287L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

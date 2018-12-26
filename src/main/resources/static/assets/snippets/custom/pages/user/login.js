@@ -74,7 +74,7 @@ var SnippetLogin = function() {
                     },
                     error: function(e,t,r,s){
                     	a.removeClass("m-loader m-loader--right m-loader--light").attr("disabled", !1);
-                    	i(l, "danger", "很抱歉！服务器异常，请联系管理员");
+                    	i(l, "danger", "抱歉，服务器异常，请联系管理员");
                     }
                 }))
             }),

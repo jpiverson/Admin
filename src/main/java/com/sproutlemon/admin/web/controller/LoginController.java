@@ -59,8 +59,7 @@ public class LoginController extends AdminController {
 			return LoginFailureType.WRONG_PASSWORD.toString(); // 返回登录标识
 		}
 
-		// 登录成功
-		session.setAttribute("userAccount", userAccount); // 写入session
+		session.setAttribute("userAccount", userAccount); // 登录成功，写入session
 		loginService.save(logLogin);// 写登录日志
 
 		return logLogin.getFailureType().toString();// 返回登录标识

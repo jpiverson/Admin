@@ -1,5 +1,6 @@
 package com.sproutlemon.admin.entity.sys;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,7 +24,12 @@ import com.sproutlemon.admin.enums.UserAccoutType;
  */
 @Entity
 @Table(name = "sys_account")
-public class SysAccount {
+public class SysAccount implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9105926468543933498L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

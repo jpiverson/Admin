@@ -1,5 +1,6 @@
 package com.sproutlemon.admin.entity.edu;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,12 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "edu_class")
-public class EduClass {
+public class EduClass implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 432384110883372603L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

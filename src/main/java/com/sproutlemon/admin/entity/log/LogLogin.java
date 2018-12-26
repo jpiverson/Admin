@@ -1,5 +1,6 @@
 package com.sproutlemon.admin.entity.log;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,7 +24,12 @@ import com.sproutlemon.admin.enums.LoginFailureType;
  */
 @Entity
 @Table(name = "log_login")
-public class LogLogin {
+public class LogLogin implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -632798861474171293L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

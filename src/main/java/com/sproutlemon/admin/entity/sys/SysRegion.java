@@ -1,5 +1,7 @@
 package com.sproutlemon.admin.entity.sys;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sys_region")
-public class SysRegion {
+public class SysRegion implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3154871338712531332L;
 
 	@Id
 	@Column(name = "id")
