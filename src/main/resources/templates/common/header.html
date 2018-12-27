@@ -110,17 +110,16 @@
 			</div>
 			
 			<div class="m-stack__item m-stack__item--right">
-
 				<!-- BEGIN: Topbar -->
 				<div id="m_header_topbar"
 					class="m-topbar  m-stack m-stack--ver m-stack--general">
 					<div class="m-stack__item m-topbar__nav-wrapper">
 						<ul class="m-topbar__nav m-nav m-nav--inline">
-							<li  th:object="${session.SYS_ACCOUNT}" class="m-nav__item m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
+							<li class="m-nav__item m-dropdown m-dropdown--medium m-dropdown--arrow  m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light" m-dropdown-toggle="click">
 								<a href="#" class="m-nav__link m-dropdown__toggle"> 
-									<span class="m-topbar__username m--hidden-mobile" th:text="*{name}"></span> 
+									<span class="m-topbar__username m--hidden-mobile" th:text="${session.SYS_ACCOUNT.name}"></span> 
 									<span class="m-topbar__userpic"> 
-										<img th:src="*{avatar}" class="m--img-rounded m--marginless m--img-centered" alt="" />
+										<img th:src="${session.SYS_ACCOUNT.avatar}" class="m--img-rounded m--marginless m--img-centered" alt="" />
 									</span> 
 									<span class="m-nav__link-icon m-topbar__usericon  m--hide">
 										<span class="m-nav__link-icon-wrapper"><i class="flaticon-user-ok"></i></span>
@@ -133,11 +132,11 @@
 										<div class="m-dropdown__header m--align-center">
 											<div class="m-card-user m-card-user--skin-light">
 												<div class="m-card-user__pic">
-													<img th:src="*{avatar}" class="m--img-rounded m--marginless" alt="" />
+													<img th:src="${session.SYS_ACCOUNT.avatar}" class="m--img-rounded m--marginless" alt="" />
 												</div>
 												<div class="m-card-user__details">
-													<span class="m-card-user__name m--font-weight-500" th:text="*{name}"></span> 
-													<a th:href="'tel:'+*{account}" class="m-card-user__email m--font-weight-300 m-link" th:text="*{account}"></a>
+													<span class="m-card-user__name m--font-weight-500" th:text="${session.SYS_ACCOUNT.name}"></span> 
+													<a th:href="'tel:'+${session.SYS_ACCOUNT.account}" class="m-card-user__email m--font-weight-300 m-link" th:text="${session.SYS_ACCOUNT.account}"></a>
 												</div>
 											</div>
 										</div>
