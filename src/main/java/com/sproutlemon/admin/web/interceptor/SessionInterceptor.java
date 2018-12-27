@@ -27,6 +27,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 		response.setContentType("text/html;charset=UTF-8");
 		String requestUrl = request.getRequestURL().toString();// 获取请求地址
 		logger.info("拦截的地址是:::" + requestUrl);
+		
+		Object sysAccount = request.getSession().getAttribute(WebConstants.SYS_ACCOUNT_SESSION_KEY);// 获得session中的用户
 
 		for (String url : URL_WHITE_LIST) {
 			if (requestUrl.contains(url)) {
@@ -34,8 +36,6 @@ public class SessionInterceptor implements HandlerInterceptor {
 				return true;
 			}
 		}
-
-		Object sysAccount = request.getSession().getAttribute(WebConstants.SYS_ACCOUNT_SESSION_KEY);// 获得session中的用户
 		String rediretUrl = request.getContextPath() + WebConstants.LOGIN_PATH + "?requestUrl=" + requestUrl;// 跳转的地址
 		if (sysAccount == null) {
 			response.sendRedirect(rediretUrl);

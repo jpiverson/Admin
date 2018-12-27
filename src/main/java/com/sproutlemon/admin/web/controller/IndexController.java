@@ -19,10 +19,15 @@ public class IndexController extends AdminController {
 	}
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String login(HttpServletRequest request, String account, String password) {
+	public String index(HttpServletRequest request) {
 
-		return "error";
+		return "index";
+	}
 
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile(HttpServletRequest request) {
+
+		return "profile";
 	}
 
 }
