@@ -14,7 +14,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 	Logger logger = Logger.getLogger(SessionInterceptor.class);
 
 	final static String[] URL_WHITE_LIST = new String[] { WebConstants.ERROR_PATH, WebConstants.ASSETS_PATH,
-			WebConstants.LOGIN_PATH };// 无需登录，允许访问的地址
+			WebConstants.LOGIN_PATH, WebConstants.LOGOUT_PATH };// 无需登录，允许访问的地址
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -27,7 +27,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 		response.setContentType("text/html;charset=UTF-8");
 		String requestUrl = request.getRequestURL().toString();// 获取请求地址
 		logger.info("拦截的地址是:::" + requestUrl);
-		
+
 		Object sysAccount = request.getSession().getAttribute(WebConstants.SYS_ACCOUNT_SESSION_KEY);// 获得session中的用户
 
 		for (String url : URL_WHITE_LIST) {

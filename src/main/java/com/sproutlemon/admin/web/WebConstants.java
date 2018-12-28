@@ -7,6 +7,7 @@ public interface WebConstants {
 	 */
 	String INDEX_PATH = "/index"; // 后台首页
 	String LOGIN_PATH = "/login"; // 登录页面
+	String LOGOUT_PATH = "/logout"; // 登出页面
 	String ERROR_PATH = "/error"; // 错误页面
 	String ASSETS_PATH = "/assets"; // 静态资源起始路径
 
