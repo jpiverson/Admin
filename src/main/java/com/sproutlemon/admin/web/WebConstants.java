@@ -16,4 +16,6 @@ public interface WebConstants {
 	 */
 	String SYS_ACCOUNT_SESSION_KEY = "SYS_ACCOUNT";// sysAccount保存在session中的KEY
 
+	String DEFAULT_AVATAR = "http://cdn.sprout-lemon.com/image/default-avatar.png";// 默认头像地址
+
 }

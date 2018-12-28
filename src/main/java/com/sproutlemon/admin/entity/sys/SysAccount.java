@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.sproutlemon.admin.enums.UserAccoutType;
+import com.sproutlemon.admin.web.WebConstants;
 
 /**
  * 用户账号
@@ -42,7 +43,7 @@ public class SysAccount implements Serializable {
 	private String name; // 姓名
 
 	@Column(name = "avatar", length = 100, nullable = false)
-	private String avatar; // 头像
+	private String avatar = WebConstants.DEFAULT_AVATAR; // 头像
 
 	@Column(name = "password", length = 32, nullable = false)
 	private String password; // 登录密码
